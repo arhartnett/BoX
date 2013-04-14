@@ -64,7 +64,7 @@ this.requires ("SpriteAnimation")
 	}
 });
 Crafty.scene("loading", function() {
-	Crafty.load(["mainst3.png","sheet.png","mainst1.png","mainst2.png","southgrand1.png","street3.png"],function() {
+	Crafty.load(["mainst3.png","sheet.png","mainst1.png","mainst2.png","southgrand1.png","street3.png","menutext.png"],function() {
 		Crafty.scene("menu");
 	});
 
