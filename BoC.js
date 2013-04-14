@@ -64,7 +64,7 @@ this.requires ("SpriteAnimation")
 	}
 });
 Crafty.scene("loading", function() {
-	Crafty.load(["mainst3.png"],function() {
+	Crafty.load(["mainst3.png","sheet.png","mainst1.png","mainst2.png","southgrand1.png","street3.png"],function() {
 		Crafty.scene("menu");
 	});
 
@@ -77,9 +77,9 @@ Crafty.scene("loading", function() {
 });
 Crafty.scene("menu", function(){
 	Crafty.background("#999999");
-	//Crafty.e("2D, DOM, Image")
-		//.attr({x:200, y:0, h: 100, z:1})
-		//.image("menutext.png");
+	Crafty.e("2D, DOM, Image")
+		.attr({x:200, y:0, h: 100, z:1})
+		.image("menutext.png");
 	Crafty.e("2D, DOM, astill, Mouse")
 		.attr({x:100, y:200, z:2})
 		.bind('Click', function() {
@@ -111,7 +111,7 @@ Crafty.scene("theend", function() {
 		.color("white")
 		.bind('Click', function() {
 			Crafty.scene('loading');
-		})
+		});
 	Crafty.e("2D, Canvas, Text")
 		.attr({x:200, y:200, z:2})
 		.textColor("#666666")
