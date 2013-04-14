@@ -20,7 +20,7 @@ Crafty.scene("eastgrand", function() {
 		})
 	Crafty.e("2D, Canvas, Image") //Street
 		.attr({w:4176, h:446, x: 0, y:592, z:1})
-		.image("street.png", "repeat-x");
+		.image("street3.png", "repeat-x");
 	Crafty.e("2D, Canvas, Color")
 		.color("#99D9EA")
 		.attr({x:0, y:0, h:592, w:4176, z:1});
@@ -28,11 +28,11 @@ Crafty.scene("eastgrand", function() {
 		.attr({x:3500, y:0, z:2})
 		.image("southgrand1.png");
 	Crafty.e("2D, DOM, Color, Collision, poison") //Kill blocks
-		.attr({x:1115, y:650, w:50, h: 50, z:4})
+		.attr({x:1115, y:600, w:50, h: 50, z:4})
 		.collision()
 		.color("red");
 	Crafty.e("2D, DOM, Color, Collision, poison") //Kill blocks
-		.attr({x:2000, y:600, w:50, h: 50, z:4})
+		.attr({x:2000, y:550, w:50, h: 100, z:4})
 		.collision()
 		.color("red");
 	Crafty.e("2D, DOM, Color, Collision, poison") //Kill blocks
@@ -41,19 +41,19 @@ Crafty.scene("eastgrand", function() {
 		.color("red")
 		.bind('EnterFrame', function() {
 			this.y+=this.Direction;
-			if (this.y<=400 || this.y>=600) {
+			if (this.y<=350 || this.y>=600) {
 				this.Direction*=-1;
 			}
 		});
 	Crafty.e("2D, DOM, Color, Collision, solid, floor") //elevator
-		.attr({x:2650, y:550, w:100, h: 150, z:4, Direction: -1})
+		.attr({x:2650, y:500, w:100, h: 150, z:4, Direction: -1})
 		.collision()
 		.color("#663300")
 		.onHit('player', function() {
 			player.y=this.y+160;
 		});
 	Crafty.e("2D, DOM, Color, Collision, poison") //Kill blocks
-		.attr({x:2800, y:450, w:50, h: 250, z:4})
+		.attr({x:2800, y:400, w:50, h: 250, z:4})
 		.collision()
 		.color("red");
 	Crafty.e("2D, DOM, Text") //messages
@@ -64,12 +64,16 @@ Crafty.scene("eastgrand", function() {
 		.bind("EnterFrame", function() {
 			this.attr({x: -Crafty.viewport.x +20, y: -Crafty.viewport.y+10, w:200, z:6})
 			this.text(function (){
-				if (player.x>50 && player.x<150) {
+				if (player.Health>5) {
+					return "Click to Respawn"
+				}
+				else if (player.x>50 && player.x<150) {
 					return "Not all buildings have been drawn yet"
 				}
-				else if (player.x>300 && player.x<450) {
+				else if (player.x>300 && player.x<650) {
 					return "Press S at any time to set a new respawn point."
-				else if (player.x >600 && player.x < 1100) {
+				}
+				else if (player.x >800 && player.x < 1300) {
 					return "Avoid these red boxes"
 				}
 				else if (player.x>3550 && player.x < 3950) {

@@ -20,6 +20,9 @@ Crafty.scene("southmain", function() {
 					//.image("dead.png", "no-repeat");
 				
 			}
+			else if (this.y >1000) {
+				this.Health=10;
+			}
 		})
 		.bind('KeyDown', action= function(e) {
 			if (e.key== Crafty.keys['Z']) {
@@ -31,8 +34,8 @@ Crafty.scene("southmain", function() {
 			else if (e.key==Crafty.keys['X']) {
 				if (this.x >3000 && this.x <3740) {
 					this.unbind('KeyDown', action);
-					Crafty.scene("eastgrand")
 					this.x=100;
+					Crafty.scene("eastgrand");
 				}
 			}
 			else if (e.key==Crafty.keys['S']) {
@@ -48,27 +51,9 @@ Crafty.scene("southmain", function() {
 	RESPAWN=[player.x, curScene];
 	Crafty.viewport.follow(player,0,100);
 	Crafty.background("#000");
-	
-	Crafty.e("2D, DOM, Text, Persist") //FOR POSITIONS
-		.textColor("#333333")
-		.attr({x:player.x, y:player.y})
-		.bind("EnterFrame", function() {
-			this.attr({x: player.x, y: player.y})
-			this.text(player.x)
-		});
-	Crafty.e("2D, DOM, Text, Persist") //FOR RESPAWN
-		.textColor("#333333")
-		.attr({x:(player.x+200), y:player.y})
-		.bind("EnterFrame", function() {
-			this.attr({x: (player.x+50), y: player.y})
-			this.text(RESPAWN)
-		});
 	Crafty.e("2D, Canvas, Image") //Street
 		.attr({w:4176, h:356, x: 0, y:592, z:1})
 		.image("street3.png", "repeat");
-	Crafty.e("2D, Canvas, Color")
-		.attr({w:300, h: 100, x: 1600, y:700, z:2})
-		.color("white");
 	Crafty.e("2D, Canvas, Image") //buildings
 		.attr({ w: 1540, h: 592, x: 0, y:0, z:1})
 		.image("mainst1.png", "repeat");
@@ -93,15 +78,15 @@ Crafty.scene("southmain", function() {
 				Crafty.scene(RESPAWN[1]);
 			}
 		});
-	//Crafty.e("2D, DOM, Color, solid, floor")
-		//.attr({x: 1300, y: 640, w: 50, h: 50, z:4})
-		//.color("#663300");
-	//Crafty.e("2D, DOM, Color, solid, floor")
-		//.attr({x: 1500, y: 590, w: 100, h: 100, z:4})
-		//.color("#663300");
-	//Crafty.e("2D, DOM, Color, solid, floor")
-		//.attr({x: 1800, y: 490, w: 50, h: 200, z:4})
-		//.color("#663300");
+	Crafty.e("2D, DOM, Color, solid, floor")
+		.attr({x: 1300, y: 600, w: 50, h: 50, z:4})
+		.color("#663300");
+	Crafty.e("2D, DOM, Color, solid, floor")
+		.attr({x: 1500, y: 550, w: 100, h: 100, z:4})
+		.color("#663300");
+	Crafty.e("2D, DOM, Color, solid, floor")
+		.attr({x: 1800, y: 450, w: 50, h: 200, z:4})
+		.color("#663300");
 		
 	Crafty.e("2D, DOM, Text") //messages
 		.textColor("#3333FF")
@@ -111,8 +96,8 @@ Crafty.scene("southmain", function() {
 		.bind("EnterFrame", function() {
 			this.attr({x: -Crafty.viewport.x +20, y: -Crafty.viewport.y+10, w:200, z:6})
 			this.text(function (){
-				if (player.y<100 || player.y>1000||player.Health>5) {
-					return "Reload the page (F5) to restart"
+				if (player.Health>5) {
+					return "Click to respawn"
 				}
 				else if (player.x>50 && player.x < 150) {
 					return "Use LEFT and RIGHT Arrows to walk"
