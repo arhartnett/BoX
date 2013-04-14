@@ -7,7 +7,7 @@ Crafty.scene("southmain", function() {
 		.Running(character)
 		.gravity("floor")
 		.gravityConst(1)
-		.collision()
+		.collision([10,0], [70,0], [70,160], [10,160])
 		.onHit ('poison', function() {
 			this.Health+=1;
 			this.x-=50;
